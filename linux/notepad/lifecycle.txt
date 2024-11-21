@@ -1,0 +1,65 @@
+lifecycle java.txt
+
+
+package com.example.lifecycle;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Toast.makeText(this,"onCreate",Toast.LENGTH_SHORT).show();
+    }
+    @Override
+    protected void onStart(){
+        super.onStart();
+        Toast.makeText(this,"onStart",Toast.LENGTH_SHORT).show();
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        Toast.makeText(this,"onResume",Toast.LENGTH_SHORT).show();
+    }
+    @Override
+    protected void onPause(){
+        super.onPause();
+        Toast.makeText(this,"onPause",Toast.LENGTH_SHORT).show();
+    }
+    @Override
+    protected void onStop(){
+        super.onStop();
+        Toast.makeText(this,"onStop",Toast.LENGTH_SHORT).show();
+    }
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        Toast.makeText(this,"onDestroy",Toast.LENGTH_SHORT).show();
+    }
+}
+
+lifecycle xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello I am Here"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

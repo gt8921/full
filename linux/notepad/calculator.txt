@@ -1,0 +1,230 @@
+calculator
+
+mainactivity.java
+
+package com.example.cal;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+
+import android.view.View;
+import android.widget.TextView;
+import android.widget.EditText;
+import android.widget.Button;
+
+public class MainActivity extends AppCompatActivity {
+
+    private TextView textView1;
+    private Button button1,button2,button3,button4,button5,button6,button7,button8,button9,button0;
+    private Button buttonAdd, buttonSub, buttonMul, buttonDiv, buttonDot, buttonEqual;
+    private String currentInput="";
+    private double operand1=0;
+    private String operator="";
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        textView1=findViewById(R.id.text_View1);
+    }
+    public void onDigitClick(View view) {
+        Button button = (Button) view;
+        currentInput+=button.getText().toString();
+        updateDisplay();
+    }
+    public void onOperatorClick(View view){
+        if(!currentInput.isEmpty()){
+            operand1 = Double.parseDouble(currentInput);
+            operator = ((Button) view).getText().toString();
+            currentInput = "";
+        }
+    }
+    public void onEqualsClick(View view){
+        if(!currentInput.isEmpty()){
+            double operand2 = Double.parseDouble(currentInput);
+            double result = performOperation(operand1,operand2,operator);
+            currentInput = String.valueOf((result));
+            updateDisplay();
+        }
+    }
+    public void onClearClick(View view){
+        currentInput = "";
+        operand1 = 0;
+        operator = "";
+        updateDisplay();
+    }
+    private double performOperation(double operand1, double operand2, String operator){
+        switch (operator){
+            case "+": return operand1+operand2;
+            case "-": return operand1-operand2;
+            case "*": return operand1*operand2;
+            case "/":   if (operand2!=0)
+                            return operand1/operand2;
+                        else
+                            return Double.NaN;
+            default: return 0;
+        }
+    }
+    public void updateDisplay(){
+        textView1.setText(currentInput);
+    }
+}
+
+
+calculator.xml
+
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="601dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/text_View"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SIMPLE CALCULATOR"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/text_View1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textSize="24sp" />
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:columnCount="4"
+            android:rowCount="4">
+
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onDigitClick"
+                android:text="1" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onDigitClick"
+                android:text="2" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onDigitClick"
+                android:text="3" />
+
+            <Button
+                android:id="@+id/buttonDiv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onOperatorClick"
+                android:text="/" />
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onDigitClick"
+                android:text="4" />
+
+            <Button
+                android:id="@+id/button5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onDigitClick"
+                android:text="5" />
+
+            <Button
+                android:id="@+id/button6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onDigitClick"
+                android:text="6" />
+
+            <Button
+                android:id="@+id/buttonMul"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onOperatorClick"
+                android:text="*" />
+
+            <Button
+                android:id="@+id/button7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onDigitClick"
+                android:text="7" />
+
+            <Button
+                android:id="@+id/button8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onDigitClick"
+                android:text="8" />
+
+            <Button
+                android:id="@+id/button9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onDigitClick"
+                android:text="9" />
+
+            <Button
+                android:id="@+id/buttonSub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onOperatorClick"
+                android:text="-" />
+
+            <Button
+                android:id="@+id/button0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onDigitClick"
+                android:text="0" />
+
+            <Button
+                android:id="@+id/buttonDot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onClearClick"
+                android:text="C" />
+
+            <Button
+                android:id="@+id/buttonEqual"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onEqualsClick"
+                android:text="=" />
+
+            <Button
+                android:id="@+id/buttonAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onOperatorClick"
+                android:text="+" />
+        </GridLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

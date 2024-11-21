@@ -1,0 +1,76 @@
+toggle img java
+
+package com.example.toggle img;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    ImageView img1;
+    ImageView img2;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        img1=(ImageView) findViewById(R.id.im1);
+        img2=(ImageView) findViewById(R.id.im2);
+        img1.setOnClickListener(this);
+        img2.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view == img1)
+        {
+            img1.setVisibility(view.GONE);
+            img2.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            img2.setVisibility(View.GONE);
+            img1.setVisibility(View.VISIBLE);
+        }
+    }
+}
+
+Toggle.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <ImageView
+            android:id="@+id/im1"
+            android:layout_width="wrap_content"
+            android:layout_height="225dp"
+            android:layout_weight="1"
+            app:srcCompat="@android:drawable/checkbox_off_background" />
+
+        <ImageView
+            android:id="@+id/im2"
+            android:layout_width="wrap_content"
+            android:layout_height="225dp"
+            android:layout_weight="1"
+            app:srcCompat="@android:drawable/checkbox_on_background" />
+
+    </LinearLayout>
+</FrameLayout>
